@@ -25,8 +25,7 @@ namespace Week6
             var conn = new ContosoEntities();
             
             // run the query using LINQ
-            var Students = from s in conn.Students
-                           select s;
+            var Students = conn.Students;
             // display query result in gridview
             grdStudents.DataSource = Students.ToList();
             grdStudents.DataBind();
@@ -39,9 +38,7 @@ namespace Week6
 
             using (ContosoEntities db = new ContosoEntities())
             {
-                Student student = (from c in db.Students
-                                     where c.StudentID ==StudentId
-                                     select c).FirstOrDefault();
+                Student student = db.Students.First(x => x.StudentID == StudentId);
                 db.Students.Remove(student);
                 db.SaveChanges();
             }

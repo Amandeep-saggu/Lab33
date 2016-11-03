@@ -65,12 +65,10 @@ namespace Week6
             int student_id = Convert.ToInt32(StudentID.Value.ToString());
             using (ContosoEntities entities = new ContosoEntities())
             {
-                Student customer = (from c in entities.Students
-                                     where c.StudentID == student_id
-                                     select c).FirstOrDefault();
-                customer.FirstMidName = txtFirstMidName.Text;
-                customer.LastName = txtLastName.Text;
-                customer.EnrollmentDate = Convert.ToDateTime(txtEnrollmentDate.Text);
+                Student student = entities.Students.First(x => x.StudentID == student_id);
+                student.FirstMidName = txtFirstMidName.Text;
+                student.LastName = txtLastName.Text;
+                student.EnrollmentDate = Convert.ToDateTime(txtEnrollmentDate.Text);
                 entities.SaveChanges();
             }
 
